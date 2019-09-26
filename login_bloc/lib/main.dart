@@ -33,28 +33,33 @@ class HomePage extends StatelessWidget {
             mainAxisSize:MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-               TextField(
-                 keyboardType: TextInputType.emailAddress,
-                 decoration: InputDecoration(
-                   border: OutlineInputBorder(),
-                   hintText: "Enter Email",
-                   labelText: "Email"  
+               StreamBuilder(
 
+                                builder: (context,snapshot ) => TextField(
+                   keyboardType: TextInputType.emailAddress,
+                   decoration: InputDecoration(
+                     border: OutlineInputBorder(),
+                     hintText: "Enter Email",
+                     labelText: "Email"  
+
+                   ),
                  ),
                ),
                SizedBox(
                  height: 20,
                ),
-                TextField(
-                  obscureText: true,
-                 keyboardType: TextInputType.emailAddress,
-                 decoration: InputDecoration(
-                   border: OutlineInputBorder(),
-                   hintText: "Enter Password",
-                   labelText: "Password"  
+                StreamBuilder(
+                                  builder: (context, snapshot)=>TextField(
+                    obscureText: true,
+                   keyboardType: TextInputType.emailAddress,
+                   decoration: InputDecoration(
+                     border: OutlineInputBorder(),
+                     hintText: "Enter Password",
+                     labelText: "Password"  
 
-                 ),
+                   ),
                ),
+                ),
                  SizedBox(
                  height: 20,
                ),
