@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:login_bloc/lib/bloc.dart';
 
 
 void main() => runApp(MyApp());
@@ -18,6 +19,8 @@ class MyApp extends StatelessWidget {
 }
 
 class HomePage extends StatelessWidget {
+
+  final bloc = Bloc();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,7 +36,9 @@ class HomePage extends StatelessWidget {
             mainAxisSize:MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-               StreamBuilder(
+               StreamBuilder<String>(
+                 stream: bloc.email,
+
 
                                 builder: (context,snapshot ) => TextField(
                    keyboardType: TextInputType.emailAddress,
@@ -48,7 +53,8 @@ class HomePage extends StatelessWidget {
                SizedBox(
                  height: 20,
                ),
-                StreamBuilder(
+                StreamBuilder<String>(
+                  stream: bloc.password,
                                   builder: (context, snapshot)=>TextField(
                     obscureText: true,
                    keyboardType: TextInputType.emailAddress,
@@ -63,10 +69,14 @@ class HomePage extends StatelessWidget {
                  SizedBox(
                  height: 20,
                ),
-               RaisedButton(
-                 child: Text("Submit"),
-                 onPressed: (){},
-                 color: Colors.cyan,
+               StreamBuilder<bool>(
+                stream: bloc.submitCheck,
+                 builder: (context, snapshot) => RaisedButton(
+                     child: Text("Submit"),
+                     onPressed: (){},
+                     color: Colors.cyan,
+                   )
+                 
                )
 
             ],
