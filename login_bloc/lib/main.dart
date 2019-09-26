@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:login_bloc/lib/bloc.dart';
+import 'package:login_bloc/lib/page2.dart';
 
 
 void main() => runApp(MyApp());
@@ -20,9 +21,16 @@ class MyApp extends StatelessWidget {
 
 class HomePage extends StatelessWidget {
 
-  final bloc = Bloc();
+changeThePage(BuildContext context){
+  Navigator.of(context).push(MaterialPageRoute(  
+builder: (context) => PageTwo()
+  ));
+}
+
   @override
   Widget build(BuildContext context) {
+      final bloc = Bloc();
+
     return Scaffold(
       appBar: AppBar(
         title: Text("Login Page"),
@@ -38,14 +46,15 @@ class HomePage extends StatelessWidget {
             children: <Widget>[
                StreamBuilder<String>(
                  stream: bloc.email,
-
-
-                                builder: (context,snapshot ) => TextField(
+                  builder: (context,snapshot ) => TextField(
+                    onChanged: bloc.emailChanged,
                    keyboardType: TextInputType.emailAddress,
                    decoration: InputDecoration(
                      border: OutlineInputBorder(),
                      hintText: "Enter Email",
-                     labelText: "Email"  
+                     labelText: "Email"  ,
+                     errorText: snapshot.error
+                     
 
                    ),
                  ),
@@ -55,13 +64,15 @@ class HomePage extends StatelessWidget {
                ),
                 StreamBuilder<String>(
                   stream: bloc.password,
-                                  builder: (context, snapshot)=>TextField(
+                    builder: (context, snapshot)=>TextField(
+                      onChanged: bloc.passwordChanged,
                     obscureText: true,
                    keyboardType: TextInputType.emailAddress,
                    decoration: InputDecoration(
                      border: OutlineInputBorder(),
                      hintText: "Enter Password",
-                     labelText: "Password"  
+                     labelText: "Password"  ,
+                     errorText: snapshot.error
 
                    ),
                ),
@@ -73,7 +84,7 @@ class HomePage extends StatelessWidget {
                 stream: bloc.submitCheck,
                  builder: (context, snapshot) => RaisedButton(
                      child: Text("Submit"),
-                     onPressed: (){},
+                     onPressed: snapshot.hasData? changeThePage(context):null,
                      color: Colors.cyan,
                    )
                  
