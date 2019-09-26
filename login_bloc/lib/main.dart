@@ -47,7 +47,7 @@ builder: (context) => PageTwo()
                StreamBuilder<String>(
                  stream: bloc.email,
                   builder: (context,snapshot ) => TextField(
-                    onChanged: bloc.emailChanged,
+                    onChanged:(s)=> bloc.emailChanged.add(s),
                    keyboardType: TextInputType.emailAddress,
                    decoration: InputDecoration(
                      border: OutlineInputBorder(),
@@ -65,7 +65,7 @@ builder: (context) => PageTwo()
                 StreamBuilder<String>(
                   stream: bloc.password,
                     builder: (context, snapshot)=>TextField(
-                      onChanged: bloc.passwordChanged,
+                      onChanged: (s) => bloc.passwordChanged.add(s),
                     obscureText: true,
                    keyboardType: TextInputType.emailAddress,
                    decoration: InputDecoration(
@@ -84,7 +84,7 @@ builder: (context) => PageTwo()
                 stream: bloc.submitCheck,
                  builder: (context, snapshot) => RaisedButton(
                      child: Text("Submit"),
-                     onPressed: snapshot.hasData? changeThePage(context):null,
+                     onPressed: snapshot.hasData? () => changeThePage(context):null,
                      color: Colors.cyan,
                    )
                  

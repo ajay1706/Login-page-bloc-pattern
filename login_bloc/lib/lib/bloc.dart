@@ -3,11 +3,15 @@ import 'dart:async';
 import 'package:login_bloc/lib/validator.dart';
 import 'package:rxdart/rxdart.dart';
 class Bloc extends Object with Validators implements BaseBloc{
-final _emailController = StreamController<String>();
-final _passwordController = StreamController<String>();
-Function(String) get emailChanged => _emailController.sink.add;
-Function(String) get passwordChanged => _passwordController.sink.add;
+final _emailController = BehaviorSubject<String>();
+final _passwordController = BehaviorSubject<String>();
+// Function(String) get emailChanged => _emailController.sink.add;
+// Function(String) get passwordChanged => _passwordController.sink.add;
 
+//Instead we can use the StreamSink Function
+
+StreamSink<String> get emailChanged => _emailController.sink;
+StreamSink<String> get passwordChanged => _passwordController.sink;
 
 
 Stream<String> get email=> _emailController.stream.transform(emailValidator);

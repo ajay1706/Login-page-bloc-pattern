@@ -23,7 +23,7 @@ if(password.length>4){
   sink.add(password);
 }
 else {
-  sink.addError("p[assword length should be greater than 4");
+  sink.addError("password length should be greater than 4");
 }
 }
 
